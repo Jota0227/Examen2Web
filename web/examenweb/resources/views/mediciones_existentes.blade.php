@@ -9,6 +9,10 @@
         </div>
         <div class="card-body">
           <select class="form-select" id="filtro-cbx">
+            <option value="todos">Todos</option>
+            <option value="kilowatts">Kilowatts</option>
+            <option value="atts">Watts</option>
+            <option value="temperatura">Temperatura</option>
           </select>
         </div>
       </div>

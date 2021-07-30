@@ -24,19 +24,24 @@ document.querySelector("#registrar-btn").addEventListener("click", async ()=>{
         errores.push("El monto ingresado supera el limite");
     }
     if(errores.length==0){
-        let medicion={};
-        medicion.fecha = fecha;
-        medicion.hora = hora;
-        medicion.medidor = medidor;
-        medicion.direccion = direccion;
-        medicion.valor = valor;
-        medicion.tipo = tipo;
-        let res = await crearMedicion(medicion);
-        await Swal.fire("Consola Creada", "Consola creada exitosamente", "info");
-        window.location.href = "mediciones_existentes";
+        let mediciones = await getMediciones(); 
+        let medicionEncontrada = mediciones.find(c=>c.fecha===fecha && c.hora===hora);
+        if(medicionEncontrada != undefined){
+            errores.push("La consola ya existe");
+        }else{
+            let medicion={};
+            medicion.fecha = fecha;
+            medicion.hora = hora;
+            medicion.medidor = medidor;
+            medicion.direccion = direccion;
+            medicion.valor = valor;
+            medicion.tipo = tipo;
+            let res = await crearMedicion(medicion);
+            window.location.href = "mediciones_existentes";
+        }
     }else{
         Swal.fire({
-            tittle: "Errores de validacion", html: errores.join("<br />")
+            tittle: "Errores de validacion",icon:"warning", html: errores.join("<br />")
         });
     }
 });
