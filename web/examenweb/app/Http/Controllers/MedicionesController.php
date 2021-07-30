@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
 use App\Models\Medicion;
+use Illuminate\Http\Request;
+
 class MedicionesController extends Controller
 {
     public function getMediciones(){
         $mediciones = Medicion::all();
-        return $mediciones
+        return $mediciones;
     }
 
     public function filtrarMediciones(Request $request){
